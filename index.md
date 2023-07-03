@@ -11,7 +11,7 @@
 
 
 <div style="margin:auto; margin-bottom: 2%; text-align: justify; width: 70%">
-&emsp;&emsp;&emsp;&emsp;&emsp; Cool-chic (pronounced <span class="ipa">/kul ʃik/</span> as in French 🥖🧀🍷) is a <b>low-complexity</b>  neural image codec based on <b>overfitting</b>. With only <b>2 000 multiplication / decoded pixel</b>, it offers coding performance on par with HEVC.
+&emsp;&emsp;&emsp;&emsp;&emsp; Cool-chic (pronounced <span class="ipa">/kul ʃik/</span> as in French 🥖🧀🍷) is a <b>low-complexity</b>  neural image codec based on <b>overfitting</b>. With only <b>2 000 multiplications / decoded pixel</b>, it offers coding performance on par with HEVC.
 </div>
 
 <div style="text-align: center; margin-bottom: 3%">
