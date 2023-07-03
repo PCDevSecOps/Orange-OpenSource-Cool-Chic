@@ -1,0 +1,43 @@
+// Background colours
+$backgroundColour: #ffffff !default;
+$codeBackgroundColour: #fafafa !default;
+$featureBackgroundColour: #f9fafa !default;
+$accentColour: #E76F51 !default; // 05bf85
+
+// Text colours
+$headingColour: #242e2b !default;
+$bodyColour: #384743 !default;
+$linkColour: #f50 !default;
+$hoverColour: #376996 !default;
+$focusColour: #E76F51 !default;
+$captionColour: #a8adac !default;
+$white: #ffffff !default;
+
+// @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&family=Raleway&family=Ubuntu+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+// Typography
+$bodytype: (
+  // font-family: "Georgia, serif",
+  font-family: "Lato, Source Sans Pro, sans-serif",
+  regular: 400,
+  bold: 700,
+  italic: italic,
+  cap-height: 0.75,
+) !default;
+
+$headingtype: (
+  // font-family: '"Merriweather", serif',
+  font-family: "Lato",
+  regular: 400,
+  bold: 700,
+  cap-height: 0.75
+) !default;
+
+$monospacetype: (
+  font-family: "Ubuntu Mono, monospace",
+  regular: 500,
+  // cap-height: 0.75,
+) !default;
+
+// TIP: Load custom fonts in _config.yaml

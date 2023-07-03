@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "cocoen": "^3.2.0",
+    "image-compare-viewer": "^1.5.0"
+  }
+}
