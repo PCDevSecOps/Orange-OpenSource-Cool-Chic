@@ -14,7 +14,6 @@ $points: map-values($breakpoints);
 $line-widths: map-values($measures);
 $max-widths: map-values($maxwidths);
 
-
 // Breakpoints. Either set one to one of the breakpoint variables, or use a custom value for minor breakpoints.
 // Defaults to min-width, but both min->max and max-width are available too.
 // Parts based on https://gist.github.com/timknight/03e6335b8816aa534cf7
@@ -25,12 +24,11 @@ $max-widths: map-values($maxwidths);
   // If it is a string (i.e. a breakpoint variable).
   @if $value == string {
     // If using 'break-1', 'break-2' etc output the correct breakpoints from map.
-    // TODO: Uncommented becaused it was a problem for github runner's
-    // @if map-has-key($breakpoints, $break) {
-    //   @media screen and (min-width: #{math.div(map-get($breakpoints, $break), 16) * 1em} ) { @content; }
-    // } @else {
-    //   @warn "#{$break} is not a set breakpoint variable";
-    // }
+    @if map-has-key($breakpoints, $break) {
+      @media screen and (min-width: #{math.div(map-get($breakpoints, $break), 16) * 1em} ) { @content; }
+    } @else {
+      @warn "#{$break} is not a set breakpoint variable";
+    }
 
   // If it is a number, use this for the breakpoint.
   } @else if $value == number {
