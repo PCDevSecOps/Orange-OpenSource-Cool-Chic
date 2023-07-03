@@ -25,11 +25,12 @@ $max-widths: map-values($maxwidths);
   // If it is a string (i.e. a breakpoint variable).
   @if $value == string {
     // If using 'break-1', 'break-2' etc output the correct breakpoints from map.
-    @if map-has-key($breakpoints, $break) {
-      @media screen and (min-width: #{math.div(map-get($breakpoints, $break), 16) * 1em} ) { @content; }
-    } @else {
-      @warn "#{$break} is not a set breakpoint variable";
-    }
+    // TODO: Uncommented becaused it was a problem for github runner's
+    // @if map-has-key($breakpoints, $break) {
+    //   @media screen and (min-width: #{math.div(map-get($breakpoints, $break), 16) * 1em} ) { @content; }
+    // } @else {
+    //   @warn "#{$break} is not a set breakpoint variable";
+    // }
 
   // If it is a number, use this for the breakpoint.
   } @else if $value == number {
