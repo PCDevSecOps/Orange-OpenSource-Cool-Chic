@@ -247,5 +247,4 @@ help to do successive encoding and keep the best one or tweak the learning rate.
 We use the [constriction package](https://github.com/bamler-lab/constriction)
 from Robert Bamler as our entropy coder. Many thanks for the great work!
 
-    Bamler, Understanding Entropy Coding With Asymmetric Numeral Systems (ANS):
-    a Statistician's Perspective
+    Bamler, Understanding Entropy Coding With Asymmetric Numeral Systems (ANS): a Statistician's Perspective

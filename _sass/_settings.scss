@@ -2,24 +2,23 @@
 $backgroundColour: #ffffff !default;
 $codeBackgroundColour: #fafafa !default;
 $featureBackgroundColour: #f9fafa !default;
-$accentColour: #E76F51 !default; // 05bf85
+$accentColour: #05bf85 !default; // 05bf85
 
 // Text colours
 $headingColour: #242e2b !default;
 $bodyColour: #384743 !default;
-$linkColour: #f50 !default;
-$hoverColour: #376996 !default;
+$linkColour: #2A9D8F !default;
+$hoverColour: #E9C46A !default;
 $focusColour: #E76F51 !default;
 $captionColour: #a8adac !default;
 $white: #ffffff !default;
 
 // @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&family=Raleway&family=Ubuntu+Mono&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 // Typography
 $bodytype: (
   // font-family: "Georgia, serif",
-  font-family: "Lato, Source Sans Pro, sans-serif",
+  font-family: "Source Sans Pro, sans-serif",
   regular: 400,
   bold: 700,
   italic: italic,
@@ -28,7 +27,7 @@ $bodytype: (
 
 $headingtype: (
   // font-family: '"Merriweather", serif',
-  font-family: "Lato",
+  font-family: "Raleway",
   regular: 400,
   bold: 700,
   cap-height: 0.75
