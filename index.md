@@ -14,7 +14,7 @@
 </div>
 
 <div style="text-align: center; margin-bottom: 3%">
-{% include button.html text="Show me the code!" icon="github" link="https://github.com/Orange-OpenSource/Cool-Chic" color="#E76F51" %} {% include button.html text="Original paper 📝" link="https://arxiv.org/abs/2212.05458" color="#376996" %} {% include button.html text="New paper 🎉" link="https://arxiv.org/abs/2307.12706" color="#2A9D8F" %}
+{% include button.html text="Show me the code!" icon="github" link="https://github.com/Orange-OpenSource/Cool-Chic" color="#E76F51" %} {% include button.html text="See the original paper 📝" link="https://arxiv.org/abs/2212.05458" color="#376996" %} {% include button.html text="Discover our new paper! 🎉" link="https://arxiv.org/abs/2307.12706" color="#2A9D8F" %}
 </div>
 <!-- image-rendering: pixelated for nearest neighbor upsampling! -->
 
