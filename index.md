@@ -9,13 +9,12 @@
 <p>Cool-chic:  <b>Coo</b>rdinate-based <b>L</b>ow-<b>C</b>omplexity <b>H</b>ierarchical <b>I</b>mage <b>C</b>odec.</p>
 </div> -->
 
-
 <div style="margin:auto; margin-bottom: 2%; text-align: justify; width: 70%">
 &emsp;&emsp;&emsp;&emsp;&emsp; Cool-chic (pronounced <span class="ipa">/kul ʃik/</span> as in French 🥖🧀🍷) is a <b>low-complexity</b>  neural image codec based on <b>overfitting</b>. With only <b>2 000 multiplications / decoded pixel</b>, it offers coding performance on par with HEVC.
 </div>
 
 <div style="text-align: center; margin-bottom: 3%">
-{% include button.html text="Show me the code!" icon="github" link="https://github.com/Orange-OpenSource/Cool-Chic" color="#E76F51" %} {% include button.html text="Read the paper 📝" link="https://arxiv.org/abs/2212.05458" color="#376996" %} {% include button.html text="See RD graphs 📈" link="https://arxiv.org/abs/2212.05458" color="#2A9D8F" %}
+{% include button.html text="Show me the code!" icon="github" link="https://github.com/Orange-OpenSource/Cool-Chic" color="#E76F51" %} {% include button.html text="Original paper 📝" link="https://arxiv.org/abs/2212.05458" color="#376996" %} {% include button.html text="New paper 🎉" link="https://arxiv.org/abs/2307.12706" color="#2A9D8F" %}
 </div>
 <!-- image-rendering: pixelated for nearest neighbor upsampling! -->
 
@@ -116,9 +115,9 @@ for(i = 0; i < list_possible_images.length; i++)
 
 # What's new?
 
-This new Cool-Chic version provides several new features 🔥🔥🔥
+This [_updated Cool-Chic_](https://arxiv.org/abs/2307.12706) version provides several new features 🔥🔥🔥
 
-* -15% rate vs. [_COOL-CHIC, Ladune et al._](https://arxiv.org/abs/2212.05458) thanks to
+* -15% rate vs. the [_original Cool-Chic_](https://arxiv.org/abs/2212.05458) thanks to
   * Convolution-based synthesis transform
   * Adapted upsampling module
   * Improved Straight Through Estimator derivative during training
