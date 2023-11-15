@@ -9,8 +9,8 @@
 <p>Cool-chic:  <b>Coo</b>rdinate-based <b>L</b>ow-<b>C</b>omplexity <b>H</b>ierarchical <b>I</b>mage <b>C</b>odec.</p>
 </div> -->
 
-<div style="margin:auto; margin-bottom: 2%; text-align: justify; width: 70%">
-&emsp;&emsp;&emsp;&emsp;&emsp; 📢📢📢 <b>Coming soon: Cool-chic for video coding!</b> 📢📢📢
+<div style="margin:auto; margin-bottom: 2%; text-align: center; width: 70%">
+📢📢📢 <b>Coming soon: Cool-chic for video coding!</b> 📢📢📢
 </div>
 
 
