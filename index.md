@@ -9,18 +9,143 @@
 <p>Cool-chic:  <b>Coo</b>rdinate-based <b>L</b>ow-<b>C</b>omplexity <b>H</b>ierarchical <b>I</b>mage <b>C</b>odec.</p>
 </div> -->
 
-<div style="margin:auto; margin-bottom: 2%; text-align: center; width: 70%">
-📢📢📢 <b>Coming soon: Cool-chic for video coding!</b> 📢📢📢
-</div>
-
 
 <div style="margin:auto; margin-bottom: 2%; text-align: justify; width: 70%">
-&emsp;&emsp;&emsp;&emsp;&emsp; Cool-chic (pronounced <span class="ipa">/kul ʃik/</span> as in French 🥖🧀🍷) is a <b>low-complexity</b>  neural image codec based on <b>overfitting</b>. With only <b>2 000 multiplications / decoded pixel</b>, it offers coding performance on par with HEVC.
+&emsp;&emsp;&emsp;&emsp;&emsp; Cool-chic (pronounced <span class="ipa">/kul ʃik/</span> as in French 🥖🧀🍷) is a <b>low-complexity</b>  neural image codec based on <b>overfitting</b>. With only <b>2 000 multiplication / decoded pixel</b>, it offers coding performance on par with <s>HEVC</s> VVC.
 </div>
 
 <div style="text-align: center; margin-bottom: 3%">
-{% include button.html text="Show me the code!" icon="github" link="https://github.com/Orange-OpenSource/Cool-Chic" color="#E76F51" %} {% include button.html text="See the original paper 📝" link="https://arxiv.org/abs/2212.05458" color="#376996" %} {% include button.html text="Discover our new paper! 🎉" link="https://arxiv.org/abs/2307.12706" color="#2A9D8F" %}
+{% include button.html text="Show me the code!" icon="github" link="https://github.com/Orange-OpenSource/Cool-Chic" color="#E76F51" %}
 </div>
+
+
+### Version history
+
+* January 24: Cool-chic 3.0
+    - Re-implement most of the __encoder-side improvements__ proposed by [_C3: High-performance and low-complexity neural compression from a single image or video_, Kim et al.](https://arxiv.org/abs/2312.02753)
+* July 23: Cool-chic 2 [_Low-complexity Overfitted Neural Image Codec_, Leguay et al.](https://arxiv.org/abs/2307.12706)
+    - Several architecture changes for the decoder: __convolution-based__ synthesis, learnable upsampling module
+    - Friendlier usage: support for YUV 420 input format in 8-bit and 10-bit & Fixed point arithmetic for cross-platform entropy (de)coding
+* March 23: Cool-chic 1 [_COOL-CHIC: Coordinate-based Low Complexity Hierarchical Image Codec_, Ladune et al.](https://arxiv.org/abs/2212.05458)
+
+Up to come: Cool-chic 3.1 will extend Cool-chic 3.0 to video coding! 🔥🔥🔥
+
+---
+
+# Cool-chic 3.0 performance
+
+The table below presents the relative rate for identical PSNR of Cool-chic 3.0
+against different anchors. A negative figure indicates that Cool-chic 3.0
+requires less rate for the same quality. Note that we also provide all the
+bitstreams required to reproduce these results.
+
+| Dataset          | Vs. Cool-chic 2.0                            | Vs. Cool-chic 1.0                            | Vs. [_C3_, Kim et al.](https://arxiv.org/abs/2312.02753) | Vs. HEVC (HM 16.20)                          | Vs. VVC (VTM 19.1)                           |
+|------------------|----------------------------------------------|----------------------------------------------|----------------------------------------------------------|----------------------------------------------|----------------------------------------------|
+| kodak            | <span style="color:green" > -18.5  % </span> | <span style="color:green"> -27.4 %  </span>  | <span style="color:green"> - 0.6 %  </span>              | <span style="color:green" > - 14.0 % </span> | <span style="color:#f50" >+  7.2 %   </span> |
+| clic20-pro-valid | <span style="color:gray"> /  </span>         | <span style="color:gray"> /  </span>         | <span style="color:gray"> /  </span>                     | <span style="color:gray"> /  </span>         | <span style="color:gray"> /  </span>         |
+| jvet             | <span style="color:gray"> /  </span>         | <span style="color:gray"> /  </span>         | <span style="color:gray"> /  </span>                     | <span style="color:gray"> /  </span>         | <span style="color:gray"> /  </span>         |
+
+
+More results to come!
+
+# Setup
+
+## ⚠️ Python version
+
+Python version should be at least 3.10!
+
+```bash
+python3 --version                               # Should be at least 3.10
+```
+
+### Necessary packages
+
+```bash
+python3 -m pip install virtualenv                          # Install virtual env if needed
+python3 -m virtualenv venv && source venv/bin/activate     # Create and activate a virtual env named "venv"
+(venv) pip install -r requirements.txt                     # Install the required packages
+```
+
+# Decoding images with Cool-chic
+
+Already encoded files are provided as bitstreams in ```results/<dataset_name>/```where ```<dataset_name>```can be ```kodak, clic20-pro-valid, clic22-test, jvet```.
+
+For each dataset, a script is provided to decode all the bitstreams.
+
+```bash
+(venv) python results/decode_one_dataset.py <dataset_name> # Can take a few minutes
+```
+
+The file ```results/<dataset_name>/results.tsv``` provides the results that should be obtained.
+
+<br/>
+
+# Encoding your own images
+
+The script ```samples/encode_image.sh``` provides an example for encoding an image with Cool-chic:
+
+```bash
+(venv) python src/encode.py                         \
+    --input=samples/biville.png                     \
+    --output=samples/bitstream.bin                  \
+    --workdir=./my_temporary_workdir/               \
+    --lmbda=0.0002                                  \
+    --start_lr=1e-2                                 \
+    --layers_synthesis=40-1-linear-relu,3-1-linear-relu,X-3-residual-relu,X-3-residual-none \
+    --upsampling_kernel_size=8                      \
+    --layers_arm=24,24                              \
+    --n_ctx_rowcol=3                                \
+    --n_ft_per_res=1,1,1,1,1,1,1                    \
+    --n_itr=1000                                    \
+    --n_train_loops=1
+```
+
+
+| Argument                  | Role                                                      | Suggested value(s)                                                         |
+|---------------------------|-----------------------------------------------------------|----------------------------------------------------------------------------|
+| ```--input```             | Image to compress                                         | ```image.png```or ```image_<H>x<W>_1fps_yuv420_<bitdepth>b.yuv```          |
+| ```--output```            | Output path for the bitstream                             | ```image.bin```                                                            |
+| ```--workdir```           | Output several logs into this directory logs              | ```./my_temporary_workdir/```                                              |
+| ```--lmbda```             | Rate constraint                                           | From ```1e-4``` (high rate) to ```1e-2``` (low rate)                       |
+| ```--start_lr```          | Initial learning rate                                     | ```1e-2```                                                                 |
+| ```--layers_synthesis```  | Synthesis architecture, layers are separated with comas.  |```40-1-linear-relu,3-1-linear-relu,X-3-residual-relu,X-3-residual-none```  |
+| ```--upsampling_kernel_size``` | Size of the learned upsampling kernel.               |```8```                                                                     |
+| ```--layers_arm```        | Dimension of hidden layers for the auto-regressive model  | ```24,24```                                                                |
+| ```--n_ctx_rowcol```      | Number of rows & columns of context                       | ```3```                                                                    |
+| ```--n_ft_per_res```      | Number of feature(s) for each latent resolution           | ```1,1,1,1,1,1,1```                                                        |
+| ```--n_itr```             | Maximum number of iteration per training phase            | From ```10000``` to ```100000```                                           |
+| ```--n_train_loops```     | Number of independent encoding of the frame (the best one is kept)    | From ```1``` to ```5```                                        |
+
+The syntax for each layer of the synthesis is  is: ```<out_dim>-<kernel>-<type>-<non_linearity>```.  ```type``` is either```linear``` or ```residual```.  ```non_linearity``` is either ```relu```, ```leakyrelu``` or ```none```. If the ```out_dim``` is set to ```X```, it is automatically replaced by the number of required output channels (i.e. 3 for a RGB or YUV image)
+
+The script ```samples/decode_image.sh``` provides an example for decoding an image with Cool-chic:
+
+```bash
+(venv) python src/decode.py                         \
+    --input=samples/bitstream.bin                   \
+    --output=samples/biville_decoded.png
+```
+
+## YUV420 format
+
+Cool-chic is able to process YUV420 data with 8-bit and 10-bit representation. To do so, you need to call the ```src/encode.py``` script with an appropriately formatted name such as:
+
+    --input=<videoname>_<W>x<H>_<framerate>_yuv420_<bitdepth>b.yuv
+
+The encoder codes only the first frame of the video.
+
+---
+
+# Visual comparison
+
+
+
+<!-- <div>
+<p style="text-align: left; width:70%; display: inline-block;">Up to come: Cool-chic 3.1 will extend Cool-chic 3.0 to video coding.</p>
+<p style="text-align: right; width:29%;  display: inline-block;">{% include button.html text="Show me the code!" icon="github" link="https://github.com/Orange-OpenSource/Cool-Chic" color="#E76F51" %}</p>
+</div> -->
+
+
 <!-- image-rendering: pixelated for nearest neighbor upsampling! -->
 
 <div class="cocoen">
@@ -118,137 +243,18 @@ for(i = 0; i < list_possible_images.length; i++)
 
 </script>
 
-# What's new?
-
-This [_updated Cool-Chic_](https://arxiv.org/abs/2307.12706) version provides several new features 🔥🔥🔥
-
-* -15% rate vs. the [_original Cool-Chic_](https://arxiv.org/abs/2212.05458) thanks to
-  * Convolution-based synthesis transform
-  * Adapted upsampling module
-  * Improved Straight Through Estimator derivative during training
-* Friendlier usage
-  * Support for YUV 420 input format in 8-bit and 10-bit
-  * Fixed point arithmetic for the probability model allowing for cross-platform entropy (de)coding
-  * Encoding recipes _e.g._ ```fast```, ```medium```, ```slow```, ```placebo```
 
 ---
 
-# Setup
 
-### Necessary packages
+# ⚠️ Disclaimer
 
-```bash
-# Install virtual env if needed
-python3 -m pip install virtualenv
-# Create and activate a virtual env named "venv"
-virtualenv venv && source venv/bin/activate
-# Install the required packages
-python3 -m pip install -r requirements.txt
-```
-
-### Using Apple M1/M2 Neural Engine
-
-For some operations, the mps backend is not yet available. If you want to use
-Apple Neural Engine, you need to set the following environment variable:
-
-```bash
-export PYTORCH_ENABLE_MPS_FALLBACK=1
-```
-
-# Reproducing paper results
-
-Already encoded files are provided as bitstreams in ```results/<dataset_name>/```where ```<dataset_name>```can be ```kodak```, ```clic20-pro-valid```, ```clic22-test```, ```jvet```.
-
-For each dataset, a script is provided to decode all the bitstreams.
-
-```bash
-python3 results/decode_one_dataset.py <dataset_name> # Can take a few minutes
-```
-
-The file ```results/<dataset_name>/results.tsv``` provides the results that should be obtained.
-
-Compared to HEVC (HM 16.20), Cool-chic bitstreams offer the following results:
-
-| Dataset          | BD-rate vs. HEVC (HM 16.20) |
-|------------------|-----------------------------|
-| kodak            | <span style="color:#f50">+ 7.16 %  </span> |
-| clic20-pro-valid | <span style="color:green">- 4.92 %  </span>                    |
-| clic22-test      | <span style="color:green">- 4.46 %  </span>               |
-| jvet             | <span style="color:#f50">+ 11.96 %  </span>              |
-
-
-<br/>
-
-# Compressing your own images
-
-### Encoding
-
-The script ```samples/encode_image.sh``` provides an example for encoding an image with Cool-chic:
-
-```bash
-python3 src/encode.py                               \
-    --input=samples/biville.png                     \
-    --output=samples/bitstream.bin                  \
-    --model_save_path=samples/model.pt              \
-    --enc_results_path=samples/encoder_results.txt  \
-    --lmbda=0.0002                                  \
-    --start_lr=1e-2                                 \
-    --recipe=instant                                \
-    --layers_arm=24,24                              \
-    --n_ctx_rowcol=3                                \
-    --latent_n_grids=7                              \
-    --layers_synthesis=40-1-linear-relu,3-1-linear-relu,3-3-residual-relu,3-3-residual-none
-```
-
-| Argument                 | Role                                                                                                                                                                                                                                                                                                   | Suggested value(s)                                                         |
-|--------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
-| ```--input```            | Image to compress                                                                                                                                                                                                                                                                                      | ```image.png```or ```image_<H>x<W>_1fps_yuv420_<bitdepth>b.yuv```          |
-| ```--output```           | Output path for the bitstream                                                                                                                                                                                                                                                                          | ```image.bin```                                                            |
-| ```--model_save_path```  | Save the overfitted model for analysis                                                                                                                                                                                                                                                                 | ```model.pt```                                                             |
-| ```--enc_results_path``` | Save encoder logs                                                                                                                                                                                                                                                                                      | ```encoder_results.txt```                                                  |
-| ```--lmbda```            | Rate constraint                                                                                                                                                                                                                                                                                        | From ```1e-4``` (high rate) to ```1e-2``` (low rate)                       |
-| ```--start_lr```         | Initial learning rate                                                                                                                                                                                                                                                                                  | ```1e-2```                                                                 |
-| ```--recipe```           | Encoder preset                                                                                                                                                                                                                                                                                         | ```instant, faster, fast, medium, slow, placebo```                         |
-| ```--layers_arm```       | Dimension of hidden layers for the auto-regressive model                                                                                                                                                                                                                                               | ```24,24```                                                                |
-| ```--n_ctx_rowcol```     | Number of rows & columns of context                                                                                                                                                                                                                                                                    | ```3```                                                                    |
-| ```--latent_n_grids```   | Number of latent resolutions                                                                                                                                                                                                                                                                           | ```7```                                                                    |
-| ```--layers_synthesis``` | Synthesis architecture, layers are separated with comas. |```40-1-linear-relu,3-1-linear-relu,3-3-residual-relu,3-3-residual-none```
-
-<br/>
-The syntax for each layer of the synthesis is  is: ```<out_dim>-<kernel>-<type>-<non_linearity>```.  ```type``` is either```linear``` or ```residual```.  ```non_linearity``` is either ```relu```, ```leakyrelu``` or ```none```
-
-## Decoding a bitstream
-
-The script ```samples/decode_image.sh``` provides an example for decoding an image with Cool-chic:
-
-```bash
-python3 src/decode.py                               \
-    --input=samples/bitstream.bin                   \
-    --output=samples/biville_decoded.png
-```
-
-## YUV420 format
-
-Cool-chic is able to process YUV420 data with 8-bit and 10-bit representation. To do so, you need to call the ```src/encode.py``` script with an appropriately formatted name such as:
-
-    --input=<videoname>_<W>x<H>_<framerate>_yuv420_<bitdepth>b.yuv
-
-The encoder codes only the first frame of the video.
-
----
-
-# ⚠️ Disclaimer ⚠️
-
-This repository is only a proof of concept illustrating how the ideas of
-Cool-chic could be translated into an actual codec. The encoding process (i.e.
-learning the NNs and latent representation) might suffer from failures. In may
-help to do successive encoding and keep the best one or tweak the learning rate.
-
----
+This repository is only a proof of concept illustrating how the ideas of Cool-chic could be translated into an actual codec.
+The encoding process (i.e. learning the NNs and latent representation) might suffer from failures. It may help to do successive encoding and keep the best one or to tweak the learning rate.
 
 # Thanks
 
-We use the [constriction package](https://github.com/bamler-lab/constriction)
-from Robert Bamler as our entropy coder. Many thanks for the great work!
+Special thanks go to:
 
-    Bamler, Understanding Entropy Coding With Asymmetric Numeral Systems (ANS): a Statistician's Perspective
+* Robert Bamler for the [_constriction package_](https://github.com/bamler-lab/constriction) which serves as our entropy coder. More details @ [_Understanding Entropy Coding With Asymmetric Numeral Systems (ANS): a Statistician's Perspective_, Bamler](https://arxiv.org/pdf/2201.01741.pdf).
+* Hyunjik Kim, Matthias Bauer, Lucas Theis, Jonathan Richard Schwarz and Emilien Dupont for their great work enhancing Cool-chic: [_C3: High-performance and low-complexity neural compression from a single image or video_, Kim et al.](https://arxiv.org/abs/2312.02753)
