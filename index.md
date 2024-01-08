@@ -45,6 +45,8 @@ bitstreams required to reproduce these results.
 | clic20-pro-valid | <span style="color:green" > - 15.9 % </span> | <span style="color:gray"> /  </span>         | <span style="color:#f50" >+  4.4 %   </span>             | <span style="color:green" > - 20.6 % </span> | <span style="color:#f50" > + 3.4 %   </span> |
 | jvet             | <span style="color:green" > - 21.4 % </span> | <span style="color:gray"> /  </span>         | <span style="color:gray"> /  </span>                     | <span style="color:green" > - 12.1 % </span> | <span style="color:#f50" > + 27.7 %  </span> |
 
+---
+
 # Setup
 
 ## ⚠️ Python version
