@@ -45,7 +45,7 @@ bitstreams required to reproduce these results.
 | clic20-pro-valid | <span style="color:green" > - 18.0 % </span> | <span style="color:gray"> /  </span>         | <span style="color:#f50" >+  1.8 %   </span>             | <span style="color:green" > - 22.6 % </span> | <span style="color:#f50" > + 0.8 %   </span> |
 | jvet             | <span style="color:green" > - 21.4 % </span> | <span style="color:gray"> /  </span>         | <span style="color:gray"> /  </span>                     | <span style="color:green" > - 12.1 % </span> | <span style="color:#f50" > + 27.7 %  </span> |
 
-
+<br/>
 All these results are obtained with a decoding complexity ranging from 1000 to
 2700 multiplications / decoded pixel, with an average complexity of __2300 multiplications / decoded pixel__.
 
