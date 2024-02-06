@@ -9,6 +9,7 @@ Cool-chic
 
 **Cool-chic** (pronounced /kul ʃik/ as in French 🥖🧀🍷) is a low-complexity neural image and video codec based on overfitting. Image coding performance are on par with VVC for 2000 multiplication per decoded pixels, while video coding performance compete with AVC with as few as 500 multiplication per decoded pixels.
 
+`Go to Cool-chic GitHub repository. <https://github.com/Orange-OpenSource/Cool-Chic>`_
 
 Version history
 """""""""""""""
