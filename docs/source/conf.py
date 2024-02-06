@@ -58,8 +58,8 @@ autodoc_typehints = "description"
 autodoc_class_signature = "separated"
 
 html_theme_options = {
-    # "repository_url": "https://github.com/Orange-OpenSource/Cool-Chic",
-    # "use_repository_button": True,
+    "repository_url": "https://github.com/Orange-OpenSource/Cool-Chic",
+    "use_repository_button": True,
     # "home_page_in_toc": True,
 }
 
