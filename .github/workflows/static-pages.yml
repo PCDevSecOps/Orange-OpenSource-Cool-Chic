@@ -34,23 +34,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-
-
-
-
-# jobs:
-#   docs:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v4
-#       - uses: actions/setup-python@v3
-#       - name: Deploy to GitHub Pages
-#         uses: actions/deploy-pages@v4
-#         # if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-#         with:
-#           # publish_branch: pages
-#           # github_token: ${{ secrets.GITHUB_TOKEN }}
-#           publish_dir: docs/_build/html/
-#           # force_orphan: true
-
