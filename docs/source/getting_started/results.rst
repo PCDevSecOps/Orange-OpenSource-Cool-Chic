@@ -38,10 +38,10 @@ Image compression
 Image compression performance are presented on the kodak and clic20-pro-valid dataset.
 
 
-.. image:: assets/decoder_overview.png
+.. image:: assets/rd-image-kodak.png
   :alt: Kodak rd results
 
-.. image:: assets/decoder_overview.png
+.. image:: assets/rd-image-clic20-validpro.png
   :alt: CLIC20 rd results
 
 The following table sums up the compression performance obtained by Cool-chic 3
@@ -65,7 +65,7 @@ Video compression performance are presented on the first 33 frames (~= 1 second)
 * Low-delay P: address use-cases where low latency is mandatory;
 * Random access: address use-cases where compression efficiency is primordial e.g. video streaming.
 
-.. image:: assets/decoder_overview.png
+.. image:: assets/rd-videora-clic24-validsubset.png
   :alt: CLIC24 random access rd results
 
 +------------------+-------------------------+----------------------+----------------------+------------------------------------------+------------------------------------------+------------------------------------------+
