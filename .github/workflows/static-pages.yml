@@ -18,7 +18,7 @@ jobs:
       - name: install dependencies pip
         run: |
           python3 -m pip install -U pip
-          python3 -m pip install .[doc]
+          pip install -U sphinx sphinx-book-theme
 
       - name: make docs
         run: |
