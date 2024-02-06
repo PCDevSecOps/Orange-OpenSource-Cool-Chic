@@ -23,8 +23,8 @@ jobs:
           pip install sphinx sphinx-book-theme
       - name: Sphinx build
         run: |
-          sphinx-build -b html docs/source/ docs/_build/
-          ls docs/_build
+          sphinx-build docs/source/ ./
+          ls .
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
