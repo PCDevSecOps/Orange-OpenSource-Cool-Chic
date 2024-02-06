@@ -23,15 +23,14 @@ jobs:
           pip install sphinx sphinx-book-theme
       - name: Sphinx build
         run: |
-          sphinx-build docs/source/ ./
-          ls .
+          sphinx-build docs/source/ docs/build
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: '.'
+          path: 'docs/build'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
